@@ -4,51 +4,54 @@ import Options from './components/Options/Options';
 import Feedback from './components/Feedback/Feedback';
 import Notification from './components/Notification/Notification';
 
-const STORAGE_KEY = 'sip-happens-feedback';
-
 export default function App() {
+  const STORAGE_KEY = 'sip-happens-feedback';
+
   const [feedback, setFeedback] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : { good: 0, neutral: 0, bad: 0 };
+    const zeroFeedback = { good: 0, neutral: 0, bad: 0 };
+    const storedFeedback = window.localStorage.getItem(STORAGE_KEY);
+    return storedFeedback ? JSON.parse(storedFeedback) : zeroFeedback;
   });
 
-  const { good, neutral, bad } = feedback;
-  const totalFeedback = good + neutral + bad;
-  const positivePercentage = totalFeedback
-    ? Math.round((good / totalFeedback) * 100)
-    : 0;
-
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(feedback));
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(feedback));
   }, [feedback]);
 
-  const updateFeedback = type => {
-    setFeedback(prev => ({ ...prev, [type]: prev[type] + 1 }));
-  };
+  function updateFeedback(feedbackIs) {
+    return () => {
+      setFeedback({
+        ...feedback,
+        [feedbackIs]: feedback[feedbackIs] + 1,
+      });
+    };
+  }
 
-  const resetFeedback = () => {
+  function resetFeedback() {
     setFeedback({ good: 0, neutral: 0, bad: 0 });
-  };
+    // window.localStorage.removeItem(STORAGE_KEY);
+  }
+
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+  const positivePercentage = Math.round((feedback.good / totalFeedback) * 100);
 
   return (
-    <div>
+    <>
       <Description />
       <Options
-        onLeaveFeedback={updateFeedback}
-        onReset={resetFeedback}
-        hasFeedback={totalFeedback > 0}
+        feedback={feedback}
+        clickReset={!!totalFeedback}
+        updateFeedback={updateFeedback}
+        resetFeedback={resetFeedback}
       />
-      {totalFeedback > 0 ? (
+      {totalFeedback ? (
         <Feedback
-          good={good}
-          neutral={neutral}
-          bad={bad}
-          total={totalFeedback}
+          feedback={feedback}
+          totalFeedback={totalFeedback}
           positivePercentage={positivePercentage}
         />
       ) : (
-        <Notification message="No feedback yet" />
+        <Notification />
       )}
-    </div>
+    </>
   );
 }

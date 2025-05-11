@@ -3,7 +3,8 @@
     padding: 0;
     text-align: center;
     font-size: 18px;
-    color: #ece8e8;
+    min-height: 135px;
+    padding: 12px;
   }
   
   .list li {

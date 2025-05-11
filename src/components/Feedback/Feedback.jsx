@@ -1,12 +1,12 @@
 import css from './Feedback.module.css';
 
-export default function Feedback({ good, neutral, bad, total, positivePercentage }) {
+export default function Feedback({ feedback, totalFeedback, positivePercentage }) {
   return (
     <ul className={css.list}>
-      <li>Good: {good}</li>
-      <li>Neutral: {neutral}</li>
-      <li>Bad: {bad}</li>
-      <li>Total: {total}</li>
+      <li>Good: {feedback.good}</li>
+      <li>Neutral: {feedback.neutral}</li>
+      <li>Bad: {feedback.bad}</li>
+      <li>Total: {totalFeedback}</li>
       <li>Positive: {positivePercentage}%</li>
     </ul>
   );

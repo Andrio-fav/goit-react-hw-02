@@ -1,27 +1,12 @@
 .wrapper {
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
     justify-content: center;
-    margin: 20px 0;
+    padding: 12px;
   }
   
-  .button {
-    padding: 10px 20px;
-    background-color: #ececec;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .button:hover {
-    background-color: #ddd;
-  }
-  
-  .reset {
-    background-color: #ffdddd;
-    color: #b20000;
+  .thisbutton {
+    display: flex;
+    margin-right: 12px;
+    gap: 12px
   }
   

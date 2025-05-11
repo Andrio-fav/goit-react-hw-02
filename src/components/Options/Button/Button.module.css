@@ -1,0 +1,15 @@
+.button {
+    text-transform: capitalize;
+    padding: 8px;
+    min-width: 63px;
+    user-select: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background-color: #ddd;
+}
+  
