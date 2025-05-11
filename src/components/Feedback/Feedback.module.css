@@ -1,0 +1,12 @@
+.list {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    font-size: 18px;
+    color: #ece8e8;
+  }
+  
+  .list li {
+    font-weight: bold;
+  }
+  
